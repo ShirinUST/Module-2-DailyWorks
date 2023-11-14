@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace SeleniumExamples
             Console.WriteLine("Title "+driver.Title);
             Console.WriteLine("Title Length " + driver.Title.Length);
             Assert.AreEqual("Google", driver.Title);
-            Console.WriteLine("Pass");
+            Console.WriteLine("Title test Passed");
         }
         public void PageSourceTest()
         {
@@ -60,8 +61,8 @@ namespace SeleniumExamples
             driver.Navigate().Back();
             driver.FindElement(By.LinkText("Gmail")).Click();
             Thread.Sleep(3000);
-            // Assert.That(driver.Title.Contains("Gmail"));
-            Assert.That(driver.Url.Contains("gmail"));
+            Assert.That(driver.Title.Contains("Gmail"));
+            //Assert.That(driver.Url.Contains("gmail"));
             //Assert.That(driver.Title.Contains("Images"));
             Console.WriteLine("Gmail test Passed!");
 
@@ -69,7 +70,9 @@ namespace SeleniumExamples
         public void GImageLinkTest()
         {
             driver.Navigate().Back();
+ 
             //driver.FindElement(By.LinkText("Gmail")).Click();
+            
             driver.FindElement(By.PartialLinkText("mag")).Click();
             Thread.Sleep(3000);
             // Assert.That(driver.Title.Contains("Gmail"));
@@ -80,6 +83,9 @@ namespace SeleniumExamples
             IWebElement gsButton = driver.FindElement(By.ClassName("Tg7LZd"));
             gsButton.Click();
             Thread.Sleep(4000);
+            // Switch back to the default content
+            //driver.SwitchTo().DefaultContent();
+
             Console.WriteLine("GImage test Passed!");
 
         }
@@ -94,6 +100,15 @@ namespace SeleniumExamples
             //Assert.That(driver.Title.Contains("Images"));
             Console.WriteLine("localization test Passed!");
 
+        }
+
+        public void GAppYoutubeTest()
+        {
+
+            driver.FindElement(By.ClassName("gb_d")).Click();
+            driver.FindElement(By.XPath("//*[@id=\"yDmH0d\"]/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[4]/a")).Click();
+            Thread.Sleep(3000);
+            Assert.That("Youtube".Equals(driver.Title));`
         }
         public void Destruct()
         {
