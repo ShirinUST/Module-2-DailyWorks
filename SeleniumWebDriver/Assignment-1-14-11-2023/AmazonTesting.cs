@@ -14,24 +14,24 @@ namespace Assignment_1_14_11_2023
         IWebDriver? driver;
         public void Initialization()
         {
-            driver = new ChromeDriver();
-            driver.Url = "https://www.amazon.com/";
+            driver = new ChromeDriver();//setting the browser to be Chrome
+            driver.Url = "https://www.amazon.com/";//opens amazon page
         }
         public void TitleTest()
         {
-            Console.WriteLine("Title: "+driver.Title);
-            Assert.AreEqual("Amazon.com. Spend less. Smile more.",driver.Title);
+            Console.WriteLine("Title: "+driver.Title);//Title of the webpage
+            Assert.AreEqual("Amazon.com. Spend less. Smile more.",driver.Title);//comparing the titles
             Console.WriteLine("Title test passed");
         }
         public void CheckUrlTest()
         {
-            Console.WriteLine(driver.Url);
-            Assert.AreEqual("https://www.amazon.com/", driver.Url);
+            Console.WriteLine(driver.Url);//url of the driver
+            Assert.AreEqual("https://www.amazon.com/", driver.Url);//compare the url's
             Console.WriteLine("Url test Passed");
         }
         public void Destruct()
         {
-            driver.Close();
+            driver.Close();//closing the browser
         }
 
     }

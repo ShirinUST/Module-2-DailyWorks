@@ -14,40 +14,40 @@ namespace Assignment_2_14_11_2023
         IWebDriver? driver;
         public void Initilaization()
         {
-            driver = new ChromeDriver();
-            driver.Url = "https://www.google.com/";
+            driver = new ChromeDriver();  //setting the browser to be Chrome
+            driver.Url = "https://www.google.com/";   //giving url as google.com.It will open this
         }
         public void NavigateToYahooTest()
         {
-            driver.Navigate().GoToUrl("https://www.yahoo.com/");
+            driver.Navigate().GoToUrl("https://www.yahoo.com/");//It will navigate to yahoo
             Thread.Sleep(2000);
             Console.WriteLine("Navigate To Yahoo - Passed");
         }
         public void NavigateToGoogleTest()
         {
-            driver.Navigate().Back();
+            driver.Navigate().Back();//navigate back to google
             Thread.Sleep(1000);
             Console.WriteLine("Back To Google - Passed");
         }
         public void SearchTest()
         {
-            IWebElement searchElement = driver.FindElement(By.Id("APjFqb"));
-            searchElement.SendKeys("what's new for Diwali 2023?");
+            IWebElement searchElement = driver.FindElement(By.Id("APjFqb"));//getting web element by Id
+            searchElement.SendKeys("what's new for Diwali 2023?");// search text as the given text
             Thread.Sleep(2000);
-            IWebElement button = driver.FindElement(By.Name("btnK"));
-            button.Click();
+            IWebElement button = driver.FindElement(By.Name("btnK"));//getting the button to search
+            button.Click();//click operation
             Thread.Sleep(2000);
-            Assert.AreEqual("what's new for Diwali 2023? - Google Search", driver.Title);
+            Assert.AreEqual("what's new for Diwali 2023? - Google Search", driver.Title);//comparing the given title and driver title
             Console.WriteLine("Search Text test passed");
         }
         public void RefreshTest()
         {
-            driver.Navigate().Refresh();
+            driver.Navigate().Refresh();//refreshing the browser
             Console.WriteLine("Refresh test passed");
         }
         public void Destruct()
         {
-            driver.Close();
+            driver.Close();//closing the browser
             Console.WriteLine("Browser Closed Successfully");
         }
 
