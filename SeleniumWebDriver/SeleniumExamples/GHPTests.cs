@@ -106,9 +106,14 @@ namespace SeleniumExamples
         {
 
             driver.FindElement(By.ClassName("gb_d")).Click();
-            driver.FindElement(By.XPath("//*[@id=\"yDmH0d\"]/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[4]/a")).Click();
+            // driver.FindElement(By.XPath("//*[@id=\"yDmH0d\"]/c-wiz/div/div/c-wiz/div/div/div[2]/div[2]/div[1]/ul/li[4]/a")).Click();
+            IWebElement anchorElement= driver.FindElement(By.ClassName("tX9u1b"));
+            Console.WriteLine(anchorElement.TagName);
+            string link = anchorElement.GetAttribute("href");
+            Console.WriteLine(link);
+            driver.Navigate().GoToUrl(link);
             Thread.Sleep(3000);
-            Assert.That("Youtube".Equals(driver.Title));`
+            Assert.That("Youtube".Equals(driver.Title));
         }
         public void Destruct()
         {
