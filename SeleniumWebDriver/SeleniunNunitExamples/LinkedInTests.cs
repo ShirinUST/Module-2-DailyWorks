@@ -106,10 +106,19 @@ namespace SeleniunNunitExamples
             emailInput.SendKeys(email);
             passwordInput.SendKeys(pwd);
             TakeScreenShot();
+
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", driver.FindElement(By.XPath("//button[@type='submit']")));
+
+            Thread.Sleep(3000);
+
+            js.ExecuteScript("arguments[0].click();", driver.FindElement(By.XPath("//button[@type='submit']")));
+
+
             ClearForm(emailInput);
             ClearForm(passwordInput);
 
-            Thread.Sleep(3000);
+            
         }
 
         static object[] InvalidLoginData()
@@ -117,10 +126,11 @@ namespace SeleniunNunitExamples
             return new object[]
             {
                 new object[] { "qwerty@wer.com", "qwer" },
-                new object[] { "rose@gn.com", "blueRose" },
-                new object[] { "black@lok.com", "black" }
+                new object[] { "rose@gn.com", "blu" },
+                new object[] { "black@lok.com", "blac" }
             };
         }
         
     }
 }
+//https://www.linkedin.com/
