@@ -111,7 +111,6 @@ namespace SeleniunNunitExamples
             {
                 clickElement.Click();
                 Thread.Sleep(1000);
-
             }
             List<string> lstWindow = driver.WindowHandles.ToList();
             string lastWindowHandle = "";
@@ -165,6 +164,6 @@ namespace SeleniunNunitExamples
             Thread.Sleep(5000);
             promptAlert.Accept();
         }
-
+        //https://demoqa.com/automation-practice-form
     }
 }
