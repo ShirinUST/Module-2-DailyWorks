@@ -40,6 +40,11 @@ namespace Rediff.PageObjects
             CreateAccountLink?.Click();
             return new CreateAccountPage(driver);
         }
+        public SignInPage SignInClick()
+        {
+            SignInLink?.Click();
+            return new SignInPage(driver);
+        }
     }
 }
 

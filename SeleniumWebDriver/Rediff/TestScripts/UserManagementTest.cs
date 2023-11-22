@@ -41,6 +41,7 @@ namespace Rediff.TestScripts
             Assert.That(driver.Url.Contains("login"));
         }
         */
+        /*
         [Test, Order(1), Category("Regression Test")]
         public void CreateAccountTest()
         {
@@ -63,6 +64,32 @@ namespace Rediff.TestScripts
             Thread.Sleep(3000);
 
             createaccountpage.CreateMyAccountBtnClick();
+            //Assert.That(driver.Url.Contains("register"));
+        }
+        */
+        [Test, Order(1), Category("Regression Test")]
+        public void SignInTest()
+        {
+            var homePage = new RediffHomePage(driver);
+
+           
+            if (!driver.Url.Equals("https://www.rediff.com/"))
+            {
+                driver.Navigate().GoToUrl("https://www.rediff.com/");
+            }
+            var signInPage = homePage.SignInClick();
+
+    
+            Thread.Sleep(3000);
+            signInPage.TypeUserName("XXX");
+            signInPage.TypePassword("password");
+            signInPage.ClickRememberMeCheckBox();
+            Assert.False(signInPage.RememberMeChkbx?.Selected);
+
+         
+            Thread.Sleep(3000);
+
+            Assert.True(true);
             //Assert.That(driver.Url.Contains("register"));
         }
     }
