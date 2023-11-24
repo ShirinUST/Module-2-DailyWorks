@@ -24,13 +24,22 @@ namespace SeleniunNunitExamples
         [Test]
         public void GSTest()
         {
-            IWebElement searchinputtextbox = driver.FindElement(By.Id("APjFqb"));
-            searchinputtextbox.SendKeys("max fashions");
-            Thread.Sleep(2000);
-            IWebElement gsButton = driver.FindElement(By.ClassName("gNO89b"));  //Name("btnK"));
-            gsButton.Click();
-            Assert.AreEqual("max fashions - Google Search", driver.Title);
-            Console.WriteLine("Google Search Test - Pass");
+            string? currDir = Directory.GetParent(@"../../../")?.FullName;
+            string? excelFilePath = currDir + "\\InputData.xlsx";
+            Console.WriteLine(excelFilePath);
+
+            List<ExcelData> excelDataList=ExcelUtils.ReadExcelData(excelFilePath);
+            foreach (var excel in excelDataList)
+            {
+                Console.WriteLine(excel);
+                IWebElement searchinputtextbox = driver.FindElement(By.Id("APjFqb"));
+                searchinputtextbox.SendKeys(excel.SearchText);
+                Thread.Sleep(2000);
+                IWebElement gsButton = driver.FindElement(By.ClassName("gNO89b"));  //Name("btnK"));
+                gsButton.Click();
+                Assert.AreEqual(excel.SearchText+" - Google Search", driver.Title);
+                Console.WriteLine("Google Search Test - Pass");
+            }
             driver.Navigate().Back();
         }
         [Test]

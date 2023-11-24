@@ -1,13 +1,13 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeleniunNunitExamples
+namespace BunnyCart.Utilities
 {
     internal class CoreCodes
     {
@@ -16,48 +16,32 @@ namespace SeleniunNunitExamples
         public void ReadConfigSettings()
         {
             string currDir = Directory.GetParent(@"../../../").FullName;
-            properties= new Dictionary<string, string>();
+            properties = new Dictionary<string, string>();
 
             string fileName = currDir + "/configsettings/config.properties";
             string[] lines = File.ReadAllLines(fileName);
 
             foreach (string line in lines)
             {
-                if(!string.IsNullOrWhiteSpace(line) && line.Contains('='))
+                if (!string.IsNullOrWhiteSpace(line) && line.Contains('='))
                 {
                     string[] parts = line.Split('=');
                     string key = parts[0].Trim();
                     string value = parts[1].Trim();
                     properties[key] = value;
                 }
-                
+
             }
         }
-        public bool CheckLinkStatus(string url)
-        {
-            try
-            {
-                var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
-                request.Method = "HEAD";
-                using (var response = request.GetResponse())
-                {
-                    return true;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        [OneTimeSetUp] 
-        public void InitializeBrowser() 
+        [OneTimeSetUp]
+        public void InitializeBrowser()
         {
             ReadConfigSettings();
-            if (properties["browser"].ToLower()=="chrome")
+            if (properties["browser"].ToLower() == "chrome")
             {
                 driver = new ChromeDriver();
             }
-            else if (properties["browser"].ToLower()=="edge")
+            else if (properties["browser"].ToLower() == "edge")
             {
                 driver = new EdgeDriver();
             }
@@ -73,10 +57,15 @@ namespace SeleniunNunitExamples
             shot.SaveAsFile(fileName);
             Console.WriteLine("Screenshot captured");
         }
-        
+        public static void ScrollIntoView(IWebDriver driver, IWebElement element)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", element);
+
+        }
         [OneTimeTearDown]
         public void Destruct()
-        { 
+        {
             driver.Quit();
         }
     }
