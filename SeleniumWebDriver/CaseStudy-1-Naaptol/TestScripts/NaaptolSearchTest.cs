@@ -23,13 +23,15 @@ namespace CaseStudy_1_Naaptol.TestScripts
             Thread.Sleep(2000);
             CoreCodes.ScrollIntoView(driver, driver.FindElement(By.Id("productItem"+id)));
             Thread.Sleep(3000);
-            productpage.ClickDesiredProduct();
+            var selectedproduct=productpage.ClickDesiredProduct();
             Thread.Sleep(3000);
 
             List<string> lswindow = driver.WindowHandles.ToList();
             driver.SwitchTo().Window(lswindow[1]);
 
-
+            selectedproduct.ClickDesiredProductSize();
+            selectedproduct.ClickBuyButton();
+           
         }
     }
 }

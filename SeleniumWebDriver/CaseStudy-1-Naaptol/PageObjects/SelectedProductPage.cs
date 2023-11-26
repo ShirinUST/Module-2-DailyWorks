@@ -21,8 +21,18 @@ namespace CaseStudy_1_Naaptol.PageObjects
         [FindsBy(How = How.LinkText, Using = "Rose Gold-2.00")]
         private IWebElement DesiredProductSize { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "Rose Gold-2.00")]
-        private IWebElement DesiredProductSize { get; set; }
+        [FindsBy(How = How.Id, Using = "cart-panel-button-0")]
+        private IWebElement BuyButton { get; set; }
+
+        public void ClickDesiredProductSize()
+        {
+            DesiredProductSize.Click();
+        }
+
+        public void ClickBuyButton()
+        {
+            BuyButton.Click();
+        }
 
     }
 }
