@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 
 namespace CaseStudy_1_Naaptol.Utilities
 {
@@ -13,6 +15,10 @@ namespace CaseStudy_1_Naaptol.Utilities
     {
         Dictionary<string, string>? properties;
         public IWebDriver driver;
+
+        public ExtentReports extent;
+        ExtentSparkReporter sparkReporter;
+        public ExtentTest test;
         public void ReadConfigSettings()
         {
             string currDir = Directory.GetParent(@"../../../").FullName;
@@ -36,6 +42,13 @@ namespace CaseStudy_1_Naaptol.Utilities
         [OneTimeSetUp]
         public void InitializeBrowser()
         {
+            string currdir = Directory.GetParent(@"../../../").FullName;
+            extent = new ExtentReports();
+            sparkReporter = new ExtentSparkReporter(currdir + "ExtentReports/extent-report"
+                + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html");
+
+            extent.AttachReporter(sparkReporter);
+
             ReadConfigSettings();
             if (properties["browser"].ToLower() == "chrome")
             {

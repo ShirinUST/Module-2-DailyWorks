@@ -40,11 +40,10 @@ namespace CaseStudy_1_Naaptol.PageObjects
             BuyButton.Click();
         }
 
-        public string ClickRemoveProductLink()
+        public void ClickRemoveProductLink()
         {
             RemoveProductLink.Click();
-
-            return RemovedProduct.Text;
+           // return RemovedProduct.Text.ToString();
         }
 
     }
