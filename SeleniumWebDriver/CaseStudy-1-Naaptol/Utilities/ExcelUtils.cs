@@ -34,6 +34,7 @@ namespace CaseStudy_1_Naaptol.Utilities
                             {
                                 SearchText = GetValueOrDefault(row, "searchtext"),
                                 Id = GetValueOrDefault(row, "id"),
+                                Quantity = GetValueOrDefault(row, "quantity"),
                                 // Add more properties as needed
                             };
 

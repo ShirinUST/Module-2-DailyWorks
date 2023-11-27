@@ -27,8 +27,11 @@ namespace CaseStudy_1_Naaptol.PageObjects
         [FindsBy(How = How.LinkText, Using = "Remove")]
         private IWebElement RemoveProductLink { get; set; }
 
+        [FindsBy(How = How.ClassName, Using = "input_Special_2")]
+        private IWebElement QuantityInput { get; set; }
+
         [FindsBy(How = How.XPath, Using = "//span[text()='You have No Items in Cart !!! ']")]
-        private IWebElement RemovedProduct { get; set; }
+        public IWebElement RemovedProduct { get; set; }
 
         public void ClickDesiredProductSize()
         {
@@ -39,11 +42,16 @@ namespace CaseStudy_1_Naaptol.PageObjects
         {
             BuyButton.Click();
         }
-
+        public void AddQuantity(string quantity)
+        {
+            QuantityInput.SendKeys(Keys.Backspace);
+            QuantityInput.SendKeys(quantity);
+            QuantityInput.SendKeys(Keys.Enter);
+        }
         public void ClickRemoveProductLink()
         {
             RemoveProductLink.Click();
-           // return RemovedProduct.Text.ToString();
+           // return RemovedProduct.Text;
         }
 
     }

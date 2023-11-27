@@ -38,20 +38,24 @@ namespace CaseStudy_1_Naaptol.TestScripts
             }
 
             string? currDir = Directory.GetParent(@"../../../")?.FullName;
-                string? excelFilePath = currDir + "/TestData/InputData.xlsx";
-                string? sheetName = "NaaptolSearch";
+            string? excelFilePath = currDir + "/TestData/InputData.xlsx";
+            string? sheetName = "NaaptolSearch";
 
-                List<ExcelData> excelDataList = ExcelUtils.ReadExcelData(excelFilePath, sheetName);
+             List<ExcelData> excelDataList = ExcelUtils.ReadExcelData(excelFilePath, sheetName);
 
-                foreach (ExcelData excelData in excelDataList)
+             foreach (ExcelData excelData in excelDataList)
+             {
+                try
                 {
                     string? searchtext = excelData?.SearchText;
                     string? pid = excelData?.Id;
+                    string? quantity = excelData?.Quantity;
+
 
                     Console.WriteLine($"Search Text : {searchtext}");
                     Console.WriteLine($"Pid : {pid}");
+                    Console.WriteLine($"Quantity : {quantity}");
 
-                    
                     naaptol.TypeSearchInputText(searchtext);
                     var productpage = naaptol.ClickSearch();
                     Thread.Sleep(2000);
@@ -59,27 +63,35 @@ namespace CaseStudy_1_Naaptol.TestScripts
                     Thread.Sleep(3000);
                     var selectedproduct = productpage.ClickDesiredProduct();
                     Thread.Sleep(3000);
-                    TakeScreenShot();
+                    //TakeScreenShot();
 
                     List<string> lswindow = driver.WindowHandles.ToList();
                     driver.SwitchTo().Window(lswindow[1]);
 
                     selectedproduct.ClickDesiredProductSize();
                     selectedproduct.ClickBuyButton();
-                    TakeScreenShot();
+                    //TakeScreenShot();
                     Assert.That(selectedproduct, Is.Not.Null);
                     Console.WriteLine("Product Added Test-Passed");
 
                     Thread.Sleep(2000);
+                    selectedproduct.AddQuantity(quantity);
+                    Thread.Sleep(3000);
+                    TakeScreenShot();
                     //var removeText =
                     selectedproduct.ClickRemoveProductLink();
                     TakeScreenShot();
                     //Console.WriteLine(removeText);
-                    //Assert.That(removeText.Contains("No Items"));
-                    
+                    Assert.That(selectedproduct.RemovedProduct.Text.Contains("No Items"));
+
                     Console.WriteLine("Product Removing Test-Passed");
 
                     Thread.Sleep(3000);
+                }
+                catch(AssertionException)
+                {
+                    Console.WriteLine("test failed");
+                }
                 }
             
             

@@ -10,5 +10,6 @@ namespace CaseStudy_1_Naaptol.Utilities
     {
         public string? SearchText { get; set; }
         public string? Id { get; set; }
+        public string? Quantity { get; set; }
     }
 }
