@@ -44,7 +44,7 @@ namespace CaseStudy_1_Naaptol.Utilities
         {
             string currdir = Directory.GetParent(@"../../../").FullName;
             extent = new ExtentReports();
-            sparkReporter = new ExtentSparkReporter(currdir + "ExtentReports/extent-report"
+            sparkReporter = new ExtentSparkReporter(currdir + "/ExtentReports/extent-report"
                 + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html");
 
             extent.AttachReporter(sparkReporter);
@@ -80,6 +80,7 @@ namespace CaseStudy_1_Naaptol.Utilities
         public void Destruct()
         {
             driver.Quit();
+            extent.Flush();
         }
     }
 }
